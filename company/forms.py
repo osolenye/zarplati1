@@ -18,16 +18,18 @@ class AdminRegistrationForm(forms.ModelForm):
             admin.save()
         return admin
 
+
 class EmployeeRegistrationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
 
     class Meta:
         model = Employee
-        fields = ['first_name', 'last_name', 'patronymic', 'salary', 'phone_number', 'position', 'company']
+        fields = ['username', 'first_name', 'last_name', 'patronymic', 'salary', 'phone_number', 'position', 'company']
 
     def save(self, commit=True):
         employee = super().save(commit=False)
-        employee.set_password(self.cleaned_data['password'])
+        # Хешируем пароль
+        employee.password = make_password(self.cleaned_data['password'])
         if commit:
             employee.save()
         return employee
