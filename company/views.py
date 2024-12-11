@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import AdminRegistrationForm, EmployeeRegistrationForm, CompanyForm
+from .forms import AdminRegistrationForm, EmployeeRegistrationForm, CompanyForm, RegistrationRequestForm
 from .models import Admin, Employee, Company
 
 
@@ -38,3 +38,14 @@ def company_list(request):
     companies = Company.objects.all()  # Получаем все компании
     return render(request, 'company/company_list.html', {'companies': companies})
 
+
+def registration_request(request):
+    if request.method == 'POST':
+        form = RegistrationRequestForm(request.POST)
+        if form.is_valid():
+            form.save()  # Сохраняем запрос в базе данных
+            return redirect('company_list')  # Перенаправляем на страницу списка компаний или другую нужную страницу
+    else:
+        form = RegistrationRequestForm()
+
+    return render(request, 'company/registration_request.html', {'form': form})

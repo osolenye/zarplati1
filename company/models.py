@@ -32,3 +32,12 @@ class Admin(models.Model):
 
     def __str__(self):
         return self.username
+
+
+class RegistrationRequest(models.Model):
+    company = models.ForeignKey(Company, related_name='registration_requests', on_delete=models.CASCADE, verbose_name='Компания')
+    full_name = models.CharField(max_length=255, verbose_name='ФИО сотрудника')
+    application_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата подачи запроса')
+
+    def __str__(self):
+        return f"Запрос на регистрацию: {self.full_name} - {self.company.name} ({self.application_date})"

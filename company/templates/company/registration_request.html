@@ -1,0 +1,11 @@
+<!-- templates/company/registration_request.html -->
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Подать запрос на регистрацию сотрудника</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Подать запрос</button>
+  </form>
+{% endblock %}

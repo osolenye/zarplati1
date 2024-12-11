@@ -10,6 +10,7 @@ class Company(models.Model):
 
 # Модель Сотрудник
 class Employee(models.Model):
+    username = models.CharField(max_length=100, unique=True, verbose_name='Имя пользователя')
     first_name = models.CharField(max_length=100, verbose_name='Имя')
     last_name = models.CharField(max_length=100, verbose_name='Фамилия')
     patronymic = models.CharField(max_length=100, verbose_name='Отчество', blank=True)
@@ -17,6 +18,7 @@ class Employee(models.Model):
     phone_number = models.CharField(max_length=20, verbose_name='Номер телефона')
     position = models.CharField(max_length=100, verbose_name='Должность')
     company = models.ForeignKey(Company, related_name='employees', on_delete=models.CASCADE, verbose_name='Компания')
+    password = models.CharField(max_length=255, verbose_name='Пароль')  # Хешированный пароль
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -30,3 +32,5 @@ class Admin(models.Model):
 
     def __str__(self):
         return self.username
+
+
