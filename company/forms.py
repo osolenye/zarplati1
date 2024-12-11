@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
-from .models import Admin, Employee, Company, RegistrationRequest
+from .models import Admin, Employee, Company, RegistrationRequest, Payment
 
 
 class AdminRegistrationForm(forms.ModelForm):
@@ -43,3 +43,8 @@ class RegistrationRequestForm(forms.ModelForm):
     class Meta:
         model = RegistrationRequest
         fields = ['company', 'full_name']  # Поля для выбора компании и ввода ФИО сотрудника
+
+class PaymentForm(forms.ModelForm):
+    class Meta:
+        model = Payment
+        fields = ['employee', 'amount']  # Поля для выбора сотрудника и ввода суммы

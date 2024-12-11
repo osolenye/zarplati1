@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import AdminRegistrationForm, EmployeeRegistrationForm, CompanyForm
+from .forms import AdminRegistrationForm, EmployeeRegistrationForm, CompanyForm, RegistrationRequestForm, PaymentForm
 from .models import Admin, Employee, Company
 
 
@@ -49,3 +49,18 @@ def registration_request(request):
         form = RegistrationRequestForm()
 
     return render(request, 'company/registration_request.html', {'form': form})
+
+def add_payment(request):
+    if request.method == 'POST':
+        form = PaymentForm(request.POST)
+        if form.is_valid():
+            form.save()  # Сохраняем платеж в базе данных
+            return redirect('payment_list')  # Перенаправляем на страницу списка платежей или другую нужную страницу
+    else:
+        form = PaymentForm()
+
+    return render(request, 'company/add_payment.html', {'form': form})
+
+def payment_list(request):
+    payments = Payment.objects.all()  # Получаем все платежи
+    return render(request, 'company/payment_list.html', {'payments': payments})

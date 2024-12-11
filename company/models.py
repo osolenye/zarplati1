@@ -41,3 +41,12 @@ class RegistrationRequest(models.Model):
 
     def __str__(self):
         return f"Запрос на регистрацию: {self.full_name} - {self.company.name} ({self.application_date})"
+
+
+class Payment(models.Model):
+    employee = models.ForeignKey(Employee, related_name='payments', on_delete=models.CASCADE, verbose_name='Сотрудник')
+    amount = models.FloatField(verbose_name='Сумма')
+    payment_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата платежа')
+
+    def __str__(self):
+        return f"Платеж {self.amount} для {self.employee} на {self.payment_date}"

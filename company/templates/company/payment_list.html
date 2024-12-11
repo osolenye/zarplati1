@@ -1,0 +1,24 @@
+<!-- templates/company/payment_list.html -->
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Список платежей</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Сотрудник</th>
+        <th>Сумма</th>
+        <th>Дата платежа</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for payment in payments %}
+        <tr>
+          <td>{{ payment.employee }}</td>
+          <td>{{ payment.amount }}</td>
+          <td>{{ payment.payment_date }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

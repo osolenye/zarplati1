@@ -10,5 +10,7 @@ urlpatterns = [
     path('companies/', views.company_list, name='company_list'),  # Страница со списком компаний
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('registration_request/', views.registration_request, name='registration_request'),
+    path('add_payment/', views.add_payment, name='add_payment'),
+    path('payments/', views.payment_list, name='payment_list'),  # Путь для отображения списка платежей
 
 ]
