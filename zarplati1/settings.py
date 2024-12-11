@@ -55,9 +55,10 @@ ROOT_URLCONF = 'zarplati1.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
-        'APP_DIRS': True,
+        'DIRS': [
+            BASE_DIR / 'templates',  # Путь до папки templates на уровне проекта
+        ],
+        'APP_DIRS': True,  # Это разрешает поиск шаблонов в папке templates каждого приложения
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',

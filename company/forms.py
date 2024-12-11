@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
 from .models import Admin, Employee, Company
 
@@ -12,7 +13,7 @@ class AdminRegistrationForm(forms.ModelForm):
 
     def save(self, commit=True):
         admin = super().save(commit=False)
-        admin.set_password(self.cleaned_data['password'])
+        admin.password = make_password(self.cleaned_data['password'])  # Hash the password manually
         if commit:
             admin.save()
         return admin

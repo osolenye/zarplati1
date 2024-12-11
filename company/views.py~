@@ -1,4 +1,3 @@
-from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from .forms import AdminRegistrationForm, EmployeeRegistrationForm, CompanyForm
 from .models import Admin, Employee, Company
@@ -6,16 +5,13 @@ from .models import Admin, Employee, Company
 
 def register_admin(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-
-        user = User.objects.create_user(username=username, email=email, password=password)
-        user.is_staff = True  # Присваиваем администраторские права
-        user.is_superuser = True  # Делаем пользователя суперпользователем
-        user.save()
-
-        return redirect('some_redirect_url')  # Перенаправление после регистрации
+        form = AdminRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')  # Перенаправление на страницу логина
+    else:
+        form = AdminRegistrationForm()
+    return render(request, 'company/register_admin.html', {'form': form})
 
 def register_employee(request):
     if request.method == 'POST':

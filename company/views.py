@@ -8,7 +8,7 @@ def register_admin(request):
         form = AdminRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login')
+            return redirect('login')  # Перенаправление на страницу логина
     else:
         form = AdminRegistrationForm()
     return render(request, 'company/register_admin.html', {'form': form})
@@ -37,3 +37,4 @@ def add_company(request):
 def company_list(request):
     companies = Company.objects.all()  # Получаем все компании
     return render(request, 'company/company_list.html', {'companies': companies})
+

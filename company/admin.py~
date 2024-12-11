@@ -1,7 +1,5 @@
 from django.contrib import admin
 
-from company.models import Admin, Employee, Company
-
 # Register your models here.
 # Регистрируем модели
 admin.site.register(Admin)
