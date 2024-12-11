@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Список компаний</title>
+</head>
+<body>
+    <h2>Список компаний</h2>
+    <ul>
+        {% for company in companies %}
+            <li>{{ company.name }} ({{ company.employee_count }} сотрудников)</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'add_company' %}">Добавить новую компанию</a>
+</body>
+</html>

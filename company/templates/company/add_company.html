@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить компанию</title>
+</head>
+<body>
+    <h2>Добавить новую компанию</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Добавить компанию</button>
+    </form>
+    <a href="{% url 'company_list' %}">Вернуться к списку компаний</a>  <!-- Добавляем ссылку на страницу со списком компаний -->
+</body>
+</html>
